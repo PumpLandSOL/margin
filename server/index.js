@@ -53,9 +53,9 @@ const CATALOG = [
   { sym: 'PENGU',   cls: 'meme', mint: '2zMMhcVQEXDtdE6vsFS7S7D5oUodfJHE8vd1gnBouauv' },
   { sym: 'TRUMP',   cls: 'meme', mint: '6p6xgHyF7AeE6TZkSmFsko444wqoP15icUSqi2jfGiPN' },
   { sym: 'PUMP',    cls: 'meme', mint: 'pumpCmXqMfrsAkQ5r49WcJnRayYRqmXz6ae8H7H9Dfn' },
-  // the other desks — TODO: paste the real $QUANT / $INDEX mints, then uncomment (unpriced entries auto-disable)
-  // { sym: 'QUANT',   cls: 'meme', mint: 'PASTE_QUANT_MINT' },  // yes, really
-  // { sym: 'INDEX',   cls: 'meme', mint: 'PASTE_INDEX_MINT' },  // no hard feelings
+  // the other desks — live on Robinhood Chain (EVM), priced via DexScreener instead of Jupiter
+  { sym: 'QUANT',   cls: 'meme', chain: 'rh', mint: '0x41af7e794DEe45EEfab49B6c387eAC9368d69C4D' },  // yes, really
+  { sym: 'INDEX',   cls: 'meme', chain: 'rh', mint: '0x56910D4409F3a0C78C64DD8D0545FF0705389870' },  // no hard feelings
   // tokenized stocks / ETFs / metals (Backed xStocks)
   { sym: 'AAPLx',   cls: 'rwa',  mint: 'XsbEhLAtcf6HdfpFZ5xEMdqW8nfAvcsP5bdudRLJzJp' },
   { sym: 'NVDAx',   cls: 'rwa',  mint: 'Xsc9qvGR1efVDFGLrVsmkzv3qi45LTBjeUKSPmx9qEh' },
@@ -101,9 +101,26 @@ function receipt(action, body) {
 
 // ---------- prices (Jupiter Price API v3, single batched call) ----------
 const PRICES = {}; let PRICE_OK = false, SOLP = 0;
+const DS_URL = 'https://api.dexscreener.com/latest/dex/tokens/';
+async function pollRhPrices() {
+  // Robinhood Chain collateral (the other desks' tokens) — best-liquidity pair wins
+  const rh = CATALOG.filter((c) => c.chain === 'rh'); if (!rh.length) return;
+  try {
+    const r = await fetch(DS_URL + rh.map((c) => c.mint).join(','), { headers: { accept: 'application/json' } });
+    if (!r.ok) throw new Error('http ' + r.status);
+    const j = await r.json();
+    const best = {};
+    for (const p of j.pairs || []) {
+      const addr = ((p.baseToken && p.baseToken.address) || '').toLowerCase();
+      const liq = (p.liquidity && p.liquidity.usd) || 0, px = +p.priceUsd;
+      if (px > 0 && (!best[addr] || liq > best[addr].liq)) best[addr] = { px, liq };
+    }
+    for (const c of rh) { const b = best[c.mint.toLowerCase()]; if (b) PRICES[c.mint] = b.px; }
+  } catch (e) { /* keep last good */ }
+}
 async function pollPrices() {
   try {
-    const ids = [SOL_MINT].concat(CATALOG.map((c) => c.mint)).join(',');
+    const ids = [SOL_MINT].concat(CATALOG.filter((c) => !c.chain).map((c) => c.mint)).join(',');
     const r = await fetch(PRICE_URL + ids, { headers: { accept: 'application/json' } });
     if (!r.ok) throw new Error('http ' + r.status);
     const j = await r.json();
@@ -111,10 +128,11 @@ async function pollPrices() {
       const p = +(v && (v.usdPrice ?? v.price));
       if (p > 0) PRICES[mint] = p;
     }
-    SOLP = PRICES[SOL_MINT] || SOLP;
-    PRICE_OK = SOLP > 0;
-    cast({ type: 'prices', prices: pubPrices(), solUsd: SOLP });
   } catch (e) { /* keep last good */ }
+  await pollRhPrices();
+  SOLP = PRICES[SOL_MINT] || SOLP;
+  PRICE_OK = SOLP > 0;
+  if (PRICE_OK) cast({ type: 'prices', prices: pubPrices(), solUsd: SOLP });
 }
 function pubPrices() { const o = {}; for (const c of CATALOG) if (PRICES[c.mint]) o[c.sym] = PRICES[c.mint]; return o; }
 function catalogPub() {
@@ -162,7 +180,7 @@ async function register(wallet, ref) {
   if (Object.keys(a.vault).length === 0 && SOLP > 0) {
     a.demo = true;
     a.sol = r6(a.sol + 0.05);            // starter SOL so fees are repayable in paper mode
-    for (const sym of ['BONK', 'WIF', 'JUP', 'TRUMP']) {
+    for (const sym of ['BONK', 'WIF', 'JUP', 'TRUMP', 'QUANT', 'INDEX']) {
       const c = CATALOG.find((x) => x.sym === sym);
       if (c && PRICES[c.mint] > 0) a.vault[c.mint] = r4(100 / PRICES[c.mint]);
     }
@@ -170,7 +188,7 @@ async function register(wallet, ref) {
       const c = CATALOG.find((x) => x.sym === sym);
       if (c && PRICES[c.mint] > 0) a.vault[c.mint] = r4(150 / PRICES[c.mint]);
     }
-    receipt('demo_bag', { wallet: short(wallet), summary: `${short(wallet)} arrived with an empty account — granted a paper demo bag (~$700 across memes + tokenized stocks, plus 0.05 sol). real bags read automatically.` });
+    receipt('demo_bag', { wallet: short(wallet), summary: `${short(wallet)} arrived with an empty account — granted a paper demo bag (~$900 across memes + tokenized stocks + the other desks' tokens, plus 0.05 sol). real bags read automatically.` });
   }
   dirty();
   return a;
