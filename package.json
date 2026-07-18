@@ -1,0 +1,8 @@
+{
+  "name": "margin",
+  "version": "1.0.0",
+  "description": "MARGIN — your bag is buying power.",
+  "main": "server/index.js",
+  "scripts": { "start": "node server/index.js" },
+  "engines": { "node": ">=18" }
+}
