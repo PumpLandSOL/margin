@@ -2,3 +2,4 @@ data.json
 _shots/
 node_modules/
 .env
+_studio/out/
