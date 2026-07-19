@@ -188,7 +188,7 @@ async function register(wallet, ref) {
       const c = CATALOG.find((x) => x.sym === sym);
       if (c && PRICES[c.mint] > 0) a.vault[c.mint] = r4(150 / PRICES[c.mint]);
     }
-    receipt('demo_bag', { wallet: short(wallet), summary: `${short(wallet)} arrived with an empty account — granted a paper demo bag (~$900 across memes + tokenized stocks + the other desks' tokens, plus 0.05 sol). real bags read automatically.` });
+    receipt('demo_bag', { wallet: short(wallet), summary: `${short(wallet)} arrived with an empty account — granted a demo bag (~$900 across memes + tokenized stocks + the other desks' tokens, plus 0.05 sol). real bags read automatically.` });
   }
   dirty();
   return a;
@@ -527,7 +527,7 @@ server.on('upgrade', (req, socket) => {
 (async () => {
   await pollPrices();
   const live = catalogPub().filter((c) => c.enabled).map((c) => c.sym).join(', ');
-  server.listen(PORT, () => console.log(`MARGIN open on :${PORT} — collateral live: ${live || 'none yet'} · paper custody, real prices`));
+  server.listen(PORT, () => console.log(`MARGIN open on :${PORT} — collateral live: ${live || 'none yet'} · simulated settlement, real prices`));
   setInterval(pollPrices, PRICE_MS);
   setInterval(keeper, KEEPER_MS);
 })();

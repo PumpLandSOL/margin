@@ -111,10 +111,10 @@ td b,th.hl{color:var(--ink)}
         While the loan is open you can arm a <b>take-profit or stop-loss</b> on the collateral itself — a
         keeper watches every 15 seconds and executes it for you, clearing the debt and returning the surplus.
         Repay cleanly and your <b>credit score</b> climbs, unlocking higher LTV and lower fees.</p>
-      <div class="callout warn"><div class="ct">Paper protocol</div>
-        MARGIN is currently a <b>paper protocol</b>: prices and wallet balances are read live from mainnet, but
-        loans, balances, and settlement are simulated. Nothing is custodial and no signature is ever requested.
-        Real on-chain custody ships only after an audit — see <a href="#custody">Custody &amp; security</a>.</div>
+      <div class="callout warn"><div class="ct">Beta status</div>
+        MARGIN is in <b>beta</b>: prices and wallet balances are read live from mainnet, while loans, balances,
+        and settlement are simulated pending the on-chain program. Nothing is custodial and no signature is ever
+        requested. Real on-chain custody ships only after an audit — see <a href="#custody">Custody &amp; security</a>.</div>
     </section>
 
     <section class="s" id="architecture">
@@ -139,7 +139,7 @@ td b,th.hl{color:var(--ink)}
       <ol>
         <li><b>Connect or watch.</b> Connect a wallet (Phantom/Solflare — address only, no signature) or paste
           any address in watch mode. MARGIN reads your real balances of catalog tokens and prices them live.
-          Empty wallets receive a paper demo bag so the protocol is instantly usable.</li>
+          Empty wallets receive a demo bag so the protocol is instantly usable.</li>
         <li><b>Quote.</b> Choose a token, an amount, and a tier. MARGIN returns the SOL principal, the fee, the
           total repay amount, the term, and the exact <b>liquidation price</b> — all before you commit.</li>
         <li><b>Borrow.</b> The collateral is locked; the SOL principal lands in your balance. The loan is now
@@ -279,10 +279,10 @@ valueSol = collateralAmount × price / solUsd
         <li><b>No keys, ever.</b> Connecting a wallet uses <code>provider.connect()</code> to read your public
           address only. MARGIN never requests a transaction signature and cannot move your funds. Compare that to
           a custodial Telegram bot where "your wallet is the bot wallet."</li>
-        <li><b>Paper today.</b> In the current phase, loans and balances are simulated on real, live prices.
-          Nothing you do here touches your on-chain assets — which means nothing here can lose them.</li>
+        <li><b>Simulated settlement today.</b> In the current beta, loans and balances are simulated on real,
+          live prices. Nothing you do here touches your on-chain assets — which means nothing here can lose them.</li>
         <li><b>Audit before custody.</b> Real on-chain lending and custody ship only after a third-party audit
-          of the on-chain program. Until then, every "paper" label on the site is literal and intentional.</li>
+          of the on-chain program. Until then, settlement stays simulated — deliberately.</li>
         <li><b>Everything is a receipt.</b> Borrows, repays, auto-sells, liquidations, and fee splits are all
           written to an append-only public ledger and streamed live. Nothing happens off the record.</li>
       </ul>
@@ -315,7 +315,7 @@ valueSol = collateralAmount × price / solUsd
 
     <section class="s" id="disclosures">
       <h2><span class="no">13</span>Disclosures</h2>
-      <p>MARGIN is an experimental, <b>paper</b> lending protocol. Prices and wallet reads are real; loans,
+      <p>MARGIN is an experimental lending protocol in <b>beta</b>. Prices and wallet reads are real; loans,
         balances, settlement, and custody are simulated until an on-chain program is audited and deployed.
         <b>$MARGIN is a memecoin</b> with no promise of value, yield, or profit, and nothing here is financial
         advice. Tokenized stocks referenced are Backed xStocks priced via Jupiter and are not offered, endorsed,

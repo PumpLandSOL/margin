@@ -5,20 +5,20 @@
 **Avatar:** `margin-pfp.png` · **Header:** `margin-banner.png`
 
 **Bio:**
-> Borrow SOL against memecoins & tokenized stocks — without selling. TP/SL on pledged collateral · 15s keeper · credit that compounds. Your bag is buying power. Paper protocol.
+> The RWA lending desk — borrow SOL against tokenized stocks (AAPL, NVDA, TSLA, SPY, gold) at up to 70% LTV, and your memecoins too. TP/SL on pledged collateral · 15s keeper. Your RWAs are buying power.
 
 **Location:** `the ledger` · **Website:** `https://marginrh.xyz`
 
 ## Launch thread
 
-**1/ — attach `margin-keyart.png`**
-> your bag is buying power.
+**1/ — attach `margin-keyart.png` (or `margin-demo.mp4`)**
+> RWAs aren't just for holding anymore.
 >
-> MARGIN — borrow SOL against memecoins (up to 30% LTV) and tokenized stocks (up to 70%, 30-day terms) without selling a thing.
+> MARGIN — the first lending desk where your tokenized stocks work like a broker account: pledge AAPL, NVDA, TSLA, SPY or gold and borrow SOL at up to 70% LTV, 30-day terms. no selling.
 >
-> in your browser. never a telegram bot.
+> memecoins welcome too (30% LTV — volatility has a price).
 >
-> marginrh.xyz
+> the RWA narrative, made liquid. marginrh.xyz
 
 **2/ — attach `margin-how.png`**
 > the loop:

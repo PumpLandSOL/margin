@@ -12,7 +12,7 @@
 
 ## Status
 
-**Paper protocol.** Prices and wallet balance reads are live from mainnet; loans, balances, and
+**Beta.** Prices and wallet balance reads are live from mainnet; loans, balances, and
 settlement are simulated until the on-chain program is audited. `$MARGIN` is a memecoin with no
 promise of value, yield, or profit.
 
