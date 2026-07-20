@@ -22,6 +22,7 @@ const SIZES = {
   'margin-credit': [2400, 1350],
   'margin-vs': [2400, 1350],
   'margin-desk': [2400, 1350],
+  'margin-runners': [2400, 1350],
 };
 
 const only = process.argv[2];

@@ -246,6 +246,40 @@ assets['margin-desk'] = page(2400, 1350, `
      </div>
    </div>`);
 
+// 9) THE RUNNERS — QUANT $2M ATH · INDEX $27M ATH · MARGIN ? (2400×1350)
+assets['margin-runners'] = page(2400, 1350, `
+  .wrap{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:0 120px;gap:20px}
+  .h{font-weight:900;font-size:92px;letter-spacing:-.03em;text-align:center}
+  .bars{display:flex;align-items:flex-end;justify-content:center;gap:70px;height:640px;margin-top:10px}
+  .col{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;width:420px}
+  .bar{width:100%;border-radius:18px 18px 6px 6px;border:1px solid var(--line2)}
+  .b1{height:88px;background:#1a201a}
+  .b2{height:330px;background:#223026}
+  .b3{height:560px;background:linear-gradient(180deg,var(--lime),var(--grn) 70%);box-shadow:0 0 80px rgba(0,224,90,.35);border:none;display:flex;align-items:center;justify-content:center}
+  .b3 .q{font-weight:900;font-size:200px;color:#04110a}
+  .ath{font-family:'JetBrains Mono';font-weight:700;font-size:44px;margin:22px 0 6px}
+  .tok{font-weight:900;font-size:40px;letter-spacing:-.01em}
+  .sub2{font-size:22px;color:var(--mut);margin-top:10px;text-align:center;line-height:1.5;min-height:66px}
+  .sub2 b{color:var(--grn)}
+  .foot{font-family:'JetBrains Mono';font-size:25px;color:var(--mut);text-align:center;letter-spacing:.03em;margin-top:8px}
+  .foot b{color:var(--grn)}`,
+  `<div class="wrap">
+     <div><div class="eyebrow" style="font-size:28px;text-align:center;margin-bottom:12px">▲ the runners ▲</div>
+       <div class="h">Same meta. <span class="grad">Bigger machine.</span></div></div>
+     <div class="bars">
+       <div class="col"><div class="bar b1"></div>
+         <div class="ath" style="color:var(--mut)">$2M ATH</div><div class="tok" style="color:var(--sub)">$QUANT</div>
+         <div class="sub2">telegram-bot custody<br>memes only</div></div>
+       <div class="col"><div class="bar b2"></div>
+         <div class="ath" style="color:var(--sub)">$27M ATH</div><div class="tok" style="color:var(--sub)">$INDEX</div>
+         <div class="sub2">telegram-bot custody<br>memes only</div></div>
+       <div class="col"><div class="bar b3"><span class="q">?</span></div>
+         <div class="ath grad">YOU TELL US</div><div class="tok">$MARGIN</div>
+         <div class="sub2"><b>stocks + majors + natives</b> · web-first<br>TP/SL on collateral · AI desk · 15s keeper</div></div>
+     </div>
+     <div class="foot">we even take <b>$QUANT</b> and <b>$INDEX</b> as collateral. no hard feelings. ▲ · marginrh.xyz</div>
+   </div>`);
+
 for (const [name, html] of Object.entries(assets)) {
   fs.writeFileSync(path.join(OUT, name + '.html'), html);
   console.log('wrote', name + '.html');

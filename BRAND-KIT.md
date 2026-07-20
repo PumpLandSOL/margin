@@ -40,3 +40,4 @@ Type: **DM Sans** (900 for display, tight tracking) + **JetBrains Mono** (labels
 | `margin-credit.png` | 2400×1350 | credit tiers: Retail / Funded / Prime |
 | `margin-vs.png` | 2400×1350 | vs the other desks + $QUANT/$INDEX flex |
 | `margin-desk.png` | 2400×1350 | Meet The Desk — AI credit engine announcement |
+| `margin-runners.png` | 2400×1350 | the runners: QUANT $2M ATH · INDEX $27M ATH · $MARGIN ? |
