@@ -81,7 +81,7 @@ assets['margin-banner'] = page(3000, 1000, `
      ${mark(480, 'mbn')}
      <div>
        <div class="name grad">margin</div>
-       <div class="tag">Borrow SOL against memecoins &amp; tokenized stocks — <b>your bag is buying power.</b></div>
+       <div class="tag">Borrow ETH on Robinhood Chain against tokenized stocks &amp; memecoins — <b>your bag is buying power.</b></div>
        <div class="row">${chip('UP TO 70% LTV')}${chip('TP / SL ON COLLATERAL', 'var(--lime)')}${chip('NEVER A TELEGRAM BOT')}</div>
        <div class="dom">marginrh.xyz · $MARGIN · @MarginRH</div>
      </div>
@@ -151,13 +151,13 @@ assets['margin-tiers'] = page(2400, 1350, `
      <div class="h">Keep your bags <span class="grad">and</span> your stocks.</div>
      <div class="cls">
        <div class="card m"><div class="lab"><span class="tag">MEMECOINS</span><span class="mx">up to <b>30% LTV</b></span></div>
-         <div class="cn">Bags → SOL</div>
+         <div class="cn">Bags → ETH</div>
          <div class="tiers">${tierMini('Express', '30%', '2d · 3%')}${tierMini('Quick', '25%', '3d · 2%')}${tierMini('Standard', '20%', '7d · 1.5%')}</div></div>
        <div class="card r"><div class="lab"><span class="tag">TOKENIZED STOCKS</span><span class="mx">up to <b>70% LTV</b></span></div>
-         <div class="cn">Stocks → SOL</div>
+         <div class="cn">Stocks → ETH</div>
          <div class="tiers">${tierMini('Express', '50%', '7d · 3%')}${tierMini('Quick', '60%', '15d · 4%')}${tierMini('Standard', '70%', '30d · 5%')}</div></div>
      </div>
-     <div class="foot">AAPL · NVDA · TSLA · COIN · gold — the xStocks you already hold · marginrh.xyz</div>
+     <div class="foot">AAPL · NVDA · TSLA · COIN · gold — real Pyth equity feeds, on Robinhood Chain · marginrh.xyz</div>
    </div>`);
 
 // 6) CREDIT 2400×1350
@@ -240,7 +240,7 @@ assets['margin-desk'] = page(2400, 1350, `
        <div class="eyebrow" style="font-size:30px;margin-bottom:18px">▲ new · the ai credit engine ▲</div>
        <div class="name">Meet <span class="grad">The Desk.</span></div>
        <div class="sub">Every serious brokerage has a desk that structures the trade. Yours reads your entire bag and
-         structures your <b>optimal loan in one click</b>: what to pledge, which tier, how much SOL, and exactly where to set your stops. It proposes — <b>the rules enforce.</b></div>
+         structures your <b>optimal loan in one click</b>: what to pledge, which tier, how much ETH, and exactly where to set your stops. It proposes — <b>the rules enforce.</b></div>
        <div class="row">${chip('READS YOUR BAG')}${chip('STRUCTURES THE LOAN', 'var(--lime)')}${chip('SETS YOUR STOPS', 'var(--ink)')}</div>
        <div class="dom">marginrh.xyz · $MARGIN · @MarginRH</div>
      </div>
