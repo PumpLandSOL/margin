@@ -5,7 +5,7 @@
 **Avatar:** `margin-pfp.png` · **Header:** `margin-banner.png`
 
 **Bio:**
-> The RWA lending desk — borrow SOL against tokenized stocks (AAPL, NVDA, TSLA, SPY, gold) at up to 70% LTV, and your memecoins too. TP/SL on pledged collateral · 15s keeper. Your RWAs are buying power.
+> The RWA lending desk on Robinhood Chain — borrow ETH against tokenized stocks (AAPL, NVDA, TSLA, SPY, gold) at up to 70% LTV, and your memecoins too. TP/SL on pledged collateral · 15s keeper. Your RWAs are buying power.
 
 **Location:** `the ledger` · **Website:** `https://marginrh.xyz`
 
@@ -14,7 +14,7 @@
 **1/ — attach `margin-keyart.png` (or `margin-demo.mp4`)**
 > RWAs aren't just for holding anymore.
 >
-> MARGIN — the first lending desk where your tokenized stocks work like a broker account: pledge AAPL, NVDA, TSLA, SPY or gold and borrow SOL at up to 70% LTV, 30-day terms. no selling.
+> MARGIN — the first lending desk on Robinhood Chain where your tokenized stocks work like a broker account: pledge AAPL, NVDA, TSLA, SPY or gold and borrow ETH at up to 70% LTV, 30-day terms. no selling.
 >
 > memecoins welcome too (30% LTV — volatility has a price).
 >
@@ -50,7 +50,7 @@
 **5/ — attach `margin-desk.png`**
 > meet The Desk — the AI credit engine.
 >
-> it reads your entire bag and structures your optimal loan in one click: what to pledge, which tier, how much SOL, where your stops go.
+> it reads your entire bag and structures your optimal loan in one click: what to pledge, which tier, how much ETH, where your stops go.
 >
 > the AI proposes. the rules enforce. it can never move your funds.
 

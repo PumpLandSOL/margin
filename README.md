@@ -1,9 +1,9 @@
 # MARGIN ▲
 
-**Your bag is buying power.** Web-first lending on Solana: borrow SOL against memecoins
-(up to 30% LTV) and tokenized stocks (up to 70% LTV, 30-day terms) — without selling.
+**Your bag is buying power.** Web-first lending on **Robinhood Chain**: borrow ETH against
+tokenized stocks (up to 70% LTV, 30-day terms) and Robinhood-native memecoins (up to 30% LTV) — without selling.
 
-- **Two asset classes** — memecoins & majors, plus Backed xStocks (AAPL, NVDA, TSLA, SPY, gold…)
+- **Two asset classes** — tokenized stocks/ETFs/metals marked to real Pyth equity feeds (AAPL, NVDA, TSLA, SPY, gold…), plus Robinhood Chain natives priced from their deepest pools (QUANT, INDEX, JUGGERNAUT, CASHCAT)
 - **Auto-protect** — arm take-profits and stop-losses on collateral *while it's pledged*; a 15-second keeper executes them
 - **Credit that compounds** — on-chain score 0–1000; clean repays unlock higher LTV and lower fees (Retail → Funded → Prime)
 - **The Desk** — an AI credit engine that reads your bag and structures your optimal loan; the AI proposes, deterministic rules enforce
@@ -29,7 +29,7 @@ Dependency-free Node (>= 18). Optional env:
 | `PORT` | listen port (default 8154) |
 | `DATA_PATH` | persistence file (default `./data.json`) |
 | `MARGIN_MINT` | $MARGIN contract address — enables the CA pill on the landing |
-| `RPC_URL` | Solana RPC for real wallet balance reads |
+| `RH_RPC_URL` | Robinhood Chain RPC for real wallet balance reads (default: public mainnet RPC) |
 | `ANTHROPIC_API_KEY` | activates The Desk (AI credit engine) |
 | `DESK_MODEL` | override The Desk's model |
 

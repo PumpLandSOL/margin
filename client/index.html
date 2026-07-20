@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MARGIN — borrow SOL against memecoins & tokenized stocks. Your bag is buying power.</title>
-<meta name="description" content="Web-first lending on Solana: borrow SOL against memecoins (up to 30% LTV) and tokenized stocks (up to 70% LTV, 30-day terms). In-loan take-profits & stops, on-chain credit memory, receipts for everything.">
+<title>MARGIN — borrow ETH against tokenized stocks & memecoins on Robinhood Chain. Your bag is buying power.</title>
+<meta name="description" content="Web-first lending on Robinhood Chain: borrow ETH against tokenized stocks (up to 70% LTV, 30-day terms) and Robinhood-native memecoins (up to 30% LTV). In-loan take-profits & stops, on-chain credit memory, receipts for everything.">
 <meta property="og:title" content="MARGIN — your bag is buying power.">
 <meta property="og:description" content="Two asset classes, one click to borrow. Tokenized stocks at up to 70% LTV, TP/SL on locked collateral, credit that compounds.">
 <meta name="twitter:card" content="summary_large_image">
@@ -198,14 +198,14 @@ footer .fm{font-weight:900;font-size:16px;color:var(--ink);margin-bottom:10px}
   <div class="wrap in">
     <div class="kicker"><span class="dot"></span>LIVE PRICES · 15S KEEPER · 0 SIGNATURES EVER</div>
     <h1>Your bag is<br><span class="grn">buying power.</span></h1>
-    <p class="sub">Borrow SOL against memecoins and tokenized stocks — <b>without selling</b>.
+    <p class="sub">Borrow ETH on Robinhood Chain against tokenized stocks and memecoins — <b>without selling</b>.
       Take-profits and stops on collateral <b>while it's pledged</b>, a keeper watching every 15 seconds,
       and credit that compounds into better terms. <b>RWAs at up to 70% LTV.</b></p>
     <div class="cta">
       <a class="btn main big" href="/app">Start borrowing →</a>
       <a class="btn ghost big" href="/docs">Read the docs</a>
     </div>
-    <p class="micro">No wallet handy? <a href="/app">Watch any address →</a> · SOL <span class="mo" id="heroSol" style="color:var(--grn)">$—</span></p>
+    <p class="micro">No wallet handy? <a href="/app">Watch any address →</a> · ETH <span class="mo" id="heroSol" style="color:var(--grn)">$—</span></p>
     <div class="ca" id="ca" title="copy contract address">
       <span style="font-weight:700;color:var(--grn);letter-spacing:.1em">$MARGIN CA</span><span id="cav" style="color:var(--sub)">—</span><span id="cacopy" style="color:var(--mut)">⧉</span></div>
   </div>
@@ -224,9 +224,9 @@ footer .fm{font-weight:900;font-size:16px;color:var(--ink);margin-bottom:10px}
   </div>
   <div style="display:flex;gap:30px;justify-content:center;margin-top:26px;flex-wrap:wrap;font-family:'JetBrains Mono';font-size:11px;letter-spacing:.12em;color:var(--mut);text-transform:uppercase">
     <span><b style="color:var(--grn);font-size:14px" id="lLoans">—</b> loans</span>
-    <span><b style="color:var(--grn);font-size:14px" id="lSol">—</b> sol borrowed</span>
+    <span><b style="color:var(--grn);font-size:14px" id="lSol">—</b> eth borrowed</span>
     <span><b style="color:var(--grn);font-size:14px" id="lAcc">—</b> accounts</span>
-    <span><b style="color:var(--grn);font-size:14px" id="lFees">—</b> sol fees split</span>
+    <span><b style="color:var(--grn);font-size:14px" id="lFees">—</b> eth fees split</span>
   </div>
 </div>
 
@@ -237,7 +237,7 @@ footer .fm{font-weight:900;font-size:16px;color:var(--ink);margin-bottom:10px}
       <div class="eyebrow">The whole loop</div>
       <h2 class="big">Four moves.<br>The ticket on the right is <span class="grn">live.</span></h2>
       <div class="steps">
-        <div class="step"><span class="n">01</span><span class="t">Connect</span><span class="d">MARGIN reads your <b>real bag</b> and prices it live. Address only — no signature, ever.</span></div>
+        <div class="step"><span class="n">01</span><span class="t">Connect</span><span class="d">MARGIN reads your <b>real Robinhood Chain bag</b> and prices it live. Address only — no signature, ever.</span></div>
         <div class="step"><span class="n">02</span><span class="t">Borrow</span><span class="d">Pick a tier. Your exact <b>liquidation price</b> is quoted before you commit — like the ticket here.</span></div>
         <div class="step"><span class="n">03</span><span class="t">Protect</span><span class="d">Arm a take-profit or stop on the collateral <b>while it's pledged</b>. The 15s keeper executes it.</span></div>
         <div class="step"><span class="n">04</span><span class="t">Compound</span><span class="d">Repay clean, score climbs — <b>higher LTV, lower fees</b> on every loan after.</span></div>
@@ -246,7 +246,7 @@ footer .fm{font-weight:900;font-size:16px;color:var(--ink);margin-bottom:10px}
     <div class="ticket">
       <div class="th"><span class="tt">BORROW TICKET</span><span class="liv"><i></i>LIVE QUOTE</span></div>
       <div class="body" id="ticketBody">
-        <div class="trow"><span class="k">pledge</span><span class="v" id="qPledge">—</span></div>
+        <div class="trow"><span class="k">pledge</span><span class="v" id="qPledge">—</span></div><!-- ETH quote below -->
         <div class="trow"><span class="k">tier</span><span class="v" id="qTier">—</span></div>
         <div class="trow"><span class="k">you receive</span><span class="v g" id="qRecv">—</span></div>
         <div class="trow"><span class="k">flat fee</span><span class="v" id="qFee">—</span></div>
@@ -297,7 +297,7 @@ footer .fm{font-weight:900;font-size:16px;color:var(--ink);margin-bottom:10px}
   <div class="eyebrow">New · AI credit engine</div>
   <h2 class="big">Meet <span class="grad">The Desk.</span></h2>
   <p class="lead">Every serious brokerage has a desk that structures the trade. Yours reads your entire bag and structures your optimal loan in one click —
-    <b>what to pledge, which tier, how much SOL, where your stops go.</b> Ask it anything and it answers from your real holdings.
+    <b>what to pledge, which tier, how much ETH, where your stops go.</b> Ask it anything and it answers from your real holdings.
     The AI <b>proposes</b>; the protocol's deterministic rules <b>enforce</b> every number before you commit. It can never move your funds.</p>
   <div class="deskchips"><span class="dchip">READS YOUR BAG</span><span class="dchip" style="color:var(--lime)">STRUCTURES THE LOAN</span><span class="dchip">SETS YOUR STOPS</span></div>
   <div class="cta" style="margin-top:30px"><a class="btn main big" href="/app">Let The Desk structure my loan →</a></div>
@@ -305,7 +305,7 @@ footer .fm{font-weight:900;font-size:16px;color:var(--ink);margin-bottom:10px}
 
 <!-- CREDIT -->
 <div class="wrap"><section id="credit">
-  <div style="text-align:center"><div class="eyebrow">On-chain memory</div>
+  <div style="text-align:center"><div class="eyebrow">On-chain memory · Robinhood Chain</div>
   <h2 class="big">Credit is <span class="grn">buying power.</span></h2>
   <p class="lead" style="margin-left:auto;margin-right:auto">One score, 0 to 1000, moved only by how you borrow. Earned by repaying — never bought by holding.</p></div>
   <div class="scorebar">
@@ -337,7 +337,7 @@ footer .fm{font-weight:900;font-size:16px;color:var(--ink);margin-bottom:10px}
   </div>
   <div class="flegend">
     <span><i style="background:var(--grn)"></i><b>70% — $MARGIN holders</b>, pro-rata. No staking ritual.</span>
-    <span><i style="background:#1c2e1f"></i><b>20% — LP pool</b>, the SOL that funds loans</span>
+    <span><i style="background:#1c2e1f"></i><b>20% — LP pool</b>, the ETH that funds loans</span>
     <span><i style="background:#15211a"></i><b>5% — referrals</b>, for life</span>
     <span><i style="background:#121a14"></i><b>5% — protocol</b></span>
   </div>
@@ -362,15 +362,15 @@ footer .fm{font-weight:900;font-size:16px;color:var(--ink);margin-bottom:10px}
 
 <footer><div class="wrap">
   <div class="fm">margin ▲</div>
-  Prices and wallet reads are live; balances and settlement are simulated until the on-chain program is audited.<br>
-  $MARGIN is a memecoin with no promise of value, yield, or profit. Tokenized stocks are Backed xStocks priced via Jupiter. Never risk what you can't lose.
+  Lending on Robinhood Chain · prices and wallet reads are live; balances and settlement are simulated until the on-chain program is audited.<br>
+  $MARGIN is a memecoin with no promise of value, yield, or profit. Tokenized-stock positions mark to real Pyth equity feeds. Never risk what you can't lose.
 </div></footer>
 
 <script>
 const fmtPx=p=>'$'+(p>=1?p.toLocaleString(undefined,{maximumFractionDigits:2}):Number(p.toPrecision(2)).toString());
 fetch('/api/stats').then(r=>r.json()).then(s=>{
-  lLoans.textContent=s.loansTotal;lSol.textContent=s.borrowedSol;lAcc.textContent=s.accounts;lFees.textContent=s.fees.total;
-  if(s.solUsd)heroSol.textContent='$'+s.solUsd.toFixed(2);
+  lLoans.textContent=s.loansTotal;lSol.textContent=s.borrowedEth;lAcc.textContent=s.accounts;lFees.textContent=s.fees.total;
+  if(s.ethUsd)heroSol.textContent='$'+s.ethUsd.toFixed(2);
 }).catch(()=>{});
 fetch('/api/config').then(r=>r.json()).then(cfg=>{
   if(cfg.mint){const ca=document.getElementById('ca');ca.style.display='flex';
@@ -380,14 +380,13 @@ fetch('/api/config').then(r=>r.json()).then(cfg=>{
 
 let LIVE=[];
 function renderTicker(){
-  const cell=t=>`<span class="tk"><span class="s">${t.sym}</span><span class="p">${fmtPx(t.price)}</span><span class="c">${t.cls==='rwa'?'STOCK':(t.chain==='rh'||/QUANT|INDEX/.test(t.sym))?'RH':'MEME'}</span></span>`;
+  const cell=t=>`<span class="tk"><span class="s">${t.sym}</span><span class="p">${fmtPx(t.price)}</span><span class="c">${t.cls==='rwa'?'STOCK':'RH'}</span></span>`;
   const row=LIVE.map(cell).join('');
   document.getElementById('ticker').innerHTML=row+row; // duplicated for a seamless loop
 }
 function renderMarkets(){
-  const isRh=t=>/^(QUANT|INDEX)$/.test(t.sym);
   const row=t=>`<tr><td class="sym">${t.sym}</td>
-    <td><span class="cls ${isRh(t)?'rh':t.cls}">${isRh(t)?'ROBINHOOD CHAIN':t.cls==='rwa'?'STOCK · RWA':'MEMECOIN'}</span></td>
+    <td><span class="cls ${t.cls==='rwa'?'rwa':'rh'}">${t.cls==='rwa'?'STOCK · RWA':'ROBINHOOD CHAIN'}</span></td>
     <td class="mo r"><b>${fmtPx(t.price)}</b></td>
     <td class="mo r"><span class="ltv">${t.cls==='rwa'?'70%':'30%'}</span></td>
     <td class="mo r">${t.cls==='rwa'?'30 days':'7 days'}</td></tr>`;
@@ -415,9 +414,9 @@ async function ticketQuote(){
     if(q.error)return;
     qPledge.textContent=`${amount.toLocaleString()} ${t.sym}`;
     qTier.textContent=`${q.tier} · ${(q.ltv*100).toFixed(0)}% LTV`;
-    qRecv.textContent=`${q.principal} SOL`;
-    qFee.textContent=`${(q.feeBps/100).toFixed(2)}% · ${q.fee} SOL`;
-    qRepay.textContent=`${q.debt} SOL · ${q.days}d`;
+    qRecv.textContent=`${q.principal} ETH`;
+    qFee.textContent=`${(q.feeBps/100).toFixed(2)}% · ${q.fee} ETH`;
+    qRepay.textContent=`${q.debt} ETH · ${q.days}d`;
     qLiq.textContent=fmtPx(q.liqPriceUsd);
     qNow.textContent=fmtPx(q.priceUsd);
   }catch(e){}
@@ -433,7 +432,7 @@ try{
   const ws=new WebSocket((location.protocol==='https:'?'wss://':'ws://')+location.host);
   ws.onmessage=e=>{const m=JSON.parse(e.data);
     if(m.type==='receipt'){termRows.insertAdjacentHTML('afterbegin',trmHtml(m.receipt));while(termRows.children.length>5)termRows.lastChild.remove()}
-    if(m.type==='prices'){if(m.solUsd)heroSol.textContent='$'+m.solUsd.toFixed(2);
+    if(m.type==='prices'){if(m.ethUsd)heroSol.textContent='$'+m.ethUsd.toFixed(2);
       if(m.prices){for(const t of LIVE)if(m.prices[t.sym])t.price=m.prices[t.sym];renderTicker();renderMarkets()}}};
 }catch(e){}
 </script>

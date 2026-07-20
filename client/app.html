@@ -178,21 +178,21 @@ input:focus,select:focus{border-color:var(--grn)}
       <div class="cbanner" id="cbanner">
         <div>
           <h2>Connect your wallet to get started</h2>
-          <p>MARGIN reads your real balances and prices them live — <b>no signatures, ever</b>. Empty wallets get a demo bag.</p>
+          <p>MARGIN reads your real Robinhood Chain balances and prices them live — <b>no signatures, ever</b>. Empty wallets get a demo bag.</p>
         </div>
         <div class="r">
-          <button class="btn acc" id="bannerConnect">🟢 Phantom / Solflare</button>
-          <input id="gw" maxlength="44" placeholder="or paste any address — watch mode" style="display:none">
+          <button class="btn acc" id="bannerConnect">🟢 MetaMask / Rabby</button>
+          <input id="gw" maxlength="42" placeholder="or paste any 0x address — watch mode" style="display:none">
           <button class="btn gh" id="gGo" style="display:none">Load</button>
         </div>
       </div>
 
       <div class="stats" id="overview">
-        <div class="sc"><div class="k">SOL balance</div><div class="v" id="stSol">0.0000</div><div class="s">protocol SOL</div></div>
+        <div class="sc"><div class="k">ETH balance</div><div class="v" id="stSol">0.0000</div><div class="s">protocol ETH</div></div>
         <div class="sc"><div class="k">Holdings</div><div class="v" id="stHold">0</div><div class="s">catalog tokens</div></div>
         <div class="sc"><div class="k">Eligible collateral</div><div class="v" id="stColl">$0</div><div class="s" id="stCollS">free to pledge</div></div>
         <div class="sc"><div class="k">Active loans</div><div class="v" id="stLoans">0</div><div class="s" id="stLoansS">no active loans</div></div>
-        <div class="sc"><div class="k">Total owed</div><div class="v" id="stOwed">0.0000</div><div class="s">SOL debt</div></div>
+        <div class="sc"><div class="k">Total owed</div><div class="v" id="stOwed">0.0000</div><div class="s">ETH debt</div></div>
         <div class="sc hl"><div class="k">Buying power score</div><div class="v irid" id="stCredit">—</div><div class="s" id="stCreditS">connect to begin</div></div>
       </div>
 
@@ -213,7 +213,7 @@ input:focus,select:focus{border-color:var(--grn)}
       <div class="colL">
         <div class="panel" id="loans">
           <h3 class="sec">Active Loans <span class="cnt" id="pCount">0</span></h3>
-          <div id="pRows"><div class="empty">No active loans — pledge a supported token to borrow SOL. <a href="#borrow">Start below ↓</a></div></div>
+          <div id="pRows"><div class="empty">No active loans — pledge a supported token to borrow ETH. <a href="#borrow">Start below ↓</a></div></div>
         </div>
 
         <div class="panel" id="borrow">
@@ -273,7 +273,7 @@ input:focus,select:focus{border-color:var(--grn)}
 const $=s=>document.querySelector(s);
 const fmt=(x,d=4)=>x==null?'—':(+x).toLocaleString(undefined,{maximumFractionDigits:d});
 const px=p=>p==null?'—':'$'+(p>=1?(+p).toLocaleString(undefined,{maximumFractionDigits:2}):Number((+p).toPrecision(3)).toString());
-let CATALOG=[],ACC=null,TIER='standard',TIERS={},WALLET=localStorage.marginWallet||'',SOLUSD=0;
+let CATALOG=[],ACC=null,TIER='standard',TIERS={},WALLET=localStorage.marginWallet||'',ETHUSD=0;
 let toastT;function toast(m,err){const t=$('#toast');t.textContent=m;t.className='show'+(err?' err':'');clearTimeout(toastT);toastT=setTimeout(()=>t.className='',3400)}
 async function api(p,body){const r=await fetch(p,body?{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)}:{});const j=await r.json();if(!r.ok)throw new Error(j.error||'request failed');return j}
 
@@ -287,26 +287,26 @@ async function boot(){
   wsConnect();
   setInterval(refreshCatalog,20000);setInterval(()=>{if(WALLET)refreshAccount()},12000);
 }
-async function refreshCatalog(){const c=await api('/api/catalog');CATALOG=c.catalog;SOLUSD=c.solUsd}
+async function refreshCatalog(){const c=await api('/api/catalog');CATALOG=c.catalog;ETHUSD=c.ethUsd}
 async function refreshTape(){const r=await api('/api/receipts?n=25');$('#tape').innerHTML=r.receipts.map(rcHtml).join('')}
 const rcHtml=rc=>`<div class="rc"><span class="a ${rc.action}">${rc.action.replace('_',' ')}</span><div class="s">${esc(rc.summary||'')}</div></div>`;
 const esc=s=>String(s).replace(/[<>&]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;'}[c]));
 
-function walletProvider(){return (window.phantom&&window.phantom.solana)||window.solana||window.solflare||null}
 async function connectWallet(eager){
-  const prov=walletProvider();
-  if(!prov){if(!eager){toast('no wallet extension — use watch mode',1);showWatch()}return}
+  const eth=window.ethereum;
+  if(!eth){if(!eager){toast('no EVM wallet found — install MetaMask or Rabby, or use watch mode',1);showWatch()}return}
   try{
-    const r=await prov.connect(eager?{onlyIfTrusted:true}:undefined);
-    const pk=((r&&r.publicKey)||prov.publicKey).toString();
+    const acc=await eth.request({method:eager?'eth_accounts':'eth_requestAccounts'});
+    if(!acc||!acc.length){if(!eager)toast('connect cancelled',1);return}
     localStorage.marginConnected='1';
-    load(pk);
+    load(acc[0]);
   }catch(e){if(!eager)toast('connect cancelled',1)}
 }
+if(window.ethereum&&window.ethereum.on)window.ethereum.on('accountsChanged',acc=>{if(acc&&acc.length)load(acc[0])});
 function showWatch(){$('#gw').style.display='';$('#gGo').style.display='';$('#gw').focus()}
 async function load(w){
   w=(w||$('#gw').value).trim();
-  if(!/^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(w))return toast('that is not a solana address',1);
+  if(!/^0x[0-9a-fA-F]{40}$/.test(w))return toast('that is not an EVM address (0x…)',1);
   try{
     const ref=new URLSearchParams(location.search).get('ref');
     const r=await api('/api/register',{wallet:w,ref});
@@ -337,7 +337,7 @@ function drawGauge(score){
 function render(){
   if(!ACC)return;
   // stat cards
-  $('#stSol').textContent=fmt(ACC.sol,4);
+  $('#stSol').textContent=fmt(ACC.eth,4);
   const vaultEntries=Object.entries(ACC.vault);
   $('#stHold').textContent=vaultEntries.length;
   let collUsd=0;for(const[,v]of vaultEntries)if(v.priceUsd)collUsd+=v.free*v.priceUsd;
@@ -351,7 +351,7 @@ function render(){
   drawGauge(ACC.credit);$('#cScore').textContent=ACC.credit;$('#cTier').textContent=ACC.creditTier.toUpperCase();
   $('#cNote').textContent=ACC.credit>=800?'Prime: +4% LTV and −25bps on every tier. The top of the book.':ACC.credit>=600?'Funded: +2% LTV on every tier. Keep repaying.':'Repay clean to climb — every repay +40, liquidation −250.';
   $('#cHist').innerHTML=`<span>repaid ${ACC.history.repaid}</span><span>protected ${ACC.history.protected}</span><span>liquidated ${ACC.history.liquidated}</span>`;
-  $('#hRef').textContent=fmt(ACC.refEarned,4)+' SOL';
+  $('#hRef').textContent=fmt(ACC.refEarned,4)+' ETH';
   // vault table
   $('#vCount').textContent=vaultEntries.length;
   $('#vRows').innerHTML=vaultEntries.map(([sym,v])=>{
@@ -367,7 +367,7 @@ function render(){
   renderTierCards();
   // loans
   $('#pCount').textContent=open.length;
-  $('#pRows').innerHTML=open.map(loanHtml).join('')||'<div class="empty">No active loans — pledge a supported token to borrow SOL. <a href="#borrow">Start below ↓</a></div>';
+  $('#pRows').innerHTML=open.map(loanHtml).join('')||'<div class="empty">No active loans — pledge a supported token to borrow ETH. <a href="#borrow">Start below ↓</a></div>';
   const closed=ACC.loans.filter(l=>l.status!=='open').slice(0,6);
   $('#hRows').innerHTML=closed.map(loanHtml).join('')||'<div class="empty">Closed loans appear here.</div>';
   quote();
@@ -380,7 +380,7 @@ function loanHtml(l){
     <div class="top2"><span class="sym">${l.sym} <span class="mo small mut">× ${fmt(l.amount)}</span></span><span class="st ${l.status}">${l.status.toUpperCase()}</span></div>
     ${openL?`<div class="health"><i style="width:${Math.min(100,Math.max(3,(l.healthPct-100)/1.5+50))}%"></i></div>`:''}
     <div class="rows">
-      debt <b>${l.debt} SOL</b> · now ${px(l.priceUsd)} · liq <b style="color:var(--warn)">${px(l.liqPriceUsd)}</b>${openL?` · health <b>${l.healthPct==null?'—':l.healthPct+'%'}</b> · due <b>${dueTxt}</b>`:''}
+      debt <b>${l.debt} ETH</b> · now ${px(l.priceUsd)} · liq <b style="color:var(--warn)">${px(l.liqPriceUsd)}</b>${openL?` · health <b>${l.healthPct==null?'—':l.healthPct+'%'}</b> · due <b>${dueTxt}</b>`:''}
       ${l.tp||l.sl?`<br>auto-protect: tp ${l.tp?px(l.tp):'—'} · sl ${l.sl?px(l.sl):'—'}`:''}
     </div>
     ${openL?`<div class="pr">
@@ -408,7 +408,7 @@ async function quote(){
   if(!mint||!(amt>0)){$('#bGo').disabled=true;return}
   try{
     const q=await api(`/api/quote?mint=${mint}&amount=${amt}&tier=${TIER}&credit=${ACC?ACC.credit:300}`);
-    $('#bQuote').innerHTML=`you receive <b class="hl">${q.principal} SOL</b> now · fee <b>${q.fee}</b> · repay <b>${q.debt} SOL</b> within <b>${q.days}d</b><br>`+
+    $('#bQuote').innerHTML=`you receive <b class="hl">${q.principal} ETH</b> now · fee <b>${q.fee}</b> · repay <b>${q.debt} ETH</b> within <b>${q.days}d</b><br>`+
       `liquidation if price hits <b class="lq">${px(q.liqPriceUsd)}</b> (now ${px(q.priceUsd)}) · credit tier <b>${q.creditTier}</b> (ltv ${(q.ltv*100).toFixed(1)}%)`;
     $('#bGo').disabled=false;
   }catch(e){$('#bQuote').textContent=e.message;$('#bGo').disabled=true}
@@ -426,7 +426,7 @@ $('#bMax').onclick=()=>{const c=CATALOG.find(x=>x.mint===$('#bTok').value);if(!c
 $('#bGo').onclick=async()=>{
   try{
     const r=await api('/api/borrow',{wallet:WALLET,mint:$('#bTok').value,amount:+$('#bAmt').value,tier:TIER});
-    ACC=r.account;toast('borrowed '+r.loan.principal+' SOL — liq at '+px(r.loan.liqPriceUsd));$('#bAmt').value='';render();
+    ACC=r.account;toast('borrowed '+r.loan.principal+' ETH — liq at '+px(r.loan.liqPriceUsd));$('#bAmt').value='';render();
   }catch(e){toast(e.message,1)}
 };
 // ---------- The Desk — AI copilot ----------
@@ -445,8 +445,8 @@ $('#nmStructure').onclick=async()=>{
       <div class="nums">
         <span>pledge <b>${fmt(d.rec.amount)} ${d.rec.sym}</b></span>
         <span>tier <b>${esc(d.rec.tierLabel)}</b> (${(d.rec.ltv*100).toFixed(0)}%)</span>
-        <span>receive <b>${d.rec.principal} SOL</b></span>
-        <span>repay <b>${d.rec.debt} SOL</b> · ${d.rec.days}d</span>
+        <span>receive <b>${d.rec.principal} ETH</b></span>
+        <span>repay <b>${d.rec.debt} ETH</b> · ${d.rec.days}d</span>
         <span class="lq">liq ${px(d.rec.liqPriceUsd)}</span>
         <span>TP ${px(d.rec.tp)} · SL ${px(d.rec.sl)}</span>
       </div>
@@ -473,7 +473,7 @@ $('#nmAskGo').onclick=async()=>{
 };
 $('#nmAsk').addEventListener('keydown',e=>{if(e.key==='Enter')$('#nmAskGo').click()});
 // stats fetch for global fee card
-async function refreshGlobal(){try{const s=await api('/api/stats');$('#hFees').textContent=fmt(s.fees.holders,4)+' SOL'}catch(e){}}
+async function refreshGlobal(){try{const s=await api('/api/stats');$('#hFees').textContent=fmt(s.fees.holders,4)+' ETH'}catch(e){}}
 refreshGlobal();setInterval(refreshGlobal,20000);
 // sidebar active state
 document.querySelectorAll('.snav a[href^="#"]').forEach(a=>a.addEventListener('click',()=>{
