@@ -82,7 +82,7 @@ assets['margin-banner'] = page(3000, 1000, `
      <div>
        <div class="name grad">margin</div>
        <div class="tag">Borrow ETH on Robinhood Chain against tokenized stocks &amp; memecoins — <b>your bag is buying power.</b></div>
-       <div class="row">${chip('UP TO 70% LTV')}${chip('TP / SL ON COLLATERAL', 'var(--lime)')}${chip('NEVER A TELEGRAM BOT')}</div>
+       <div class="row">${chip('UP TO 70% LTV')}${chip('TP / SL ON COLLATERAL', 'var(--lime)')}${chip('0 SIGNATURES EVER')}</div>
        <div class="dom">marginrh.xyz · $MARGIN · @MarginRH</div>
      </div>
    </div>`);
@@ -201,7 +201,7 @@ assets['margin-vs'] = page(2400, 1350, `
      <div class="top">${mark(128, 'mvs')}<div><div class="eyebrow" style="font-size:28px;margin-bottom:8px">▲ why not the other desks ▲</div><div class="h">Same mechanics. <span class="grad">Different spine.</span></div></div></div>
      <table>
        <tr><th></th><th>THE OTHER DESKS</th><th class="b">MARGIN</th></tr>
-       ${vrow('Custody', 'Your wallet IS the bot wallet — keys in a Telegram bot', '<b>Zero keys held</b> — connect never asks for a signature')}
+       ${vrow('Custody', 'Your wallet IS the bot wallet — a custodial bot holds your keys', '<b>Zero keys held</b> — connect never asks for a signature')}
        ${vrow('Surface', 'Lives in a chat window', '<b>Web-first</b> — full dashboard, positions, live ledger')}
        ${vrow('Keeper', 'Ticks every ~90 seconds', '<b>Every 15 seconds</b> — 6× faster to your stop')}
        ${vrow('Proof', 'Trust the bot', '<b>Read the ledger</b> — every action is a public receipt')}
@@ -269,10 +269,10 @@ assets['margin-runners'] = page(2400, 1350, `
      <div class="bars">
        <div class="col"><div class="bar b1"></div>
          <div class="ath" style="color:var(--mut)">$2M ATH</div><div class="tok" style="color:var(--sub)">$QUANT</div>
-         <div class="sub2">telegram-bot custody<br>memes only</div></div>
+         <div class="sub2">custodial-bot lending<br>memes only</div></div>
        <div class="col"><div class="bar b2"></div>
          <div class="ath" style="color:var(--sub)">$27M ATH</div><div class="tok" style="color:var(--sub)">$INDEX</div>
-         <div class="sub2">telegram-bot custody<br>memes only</div></div>
+         <div class="sub2">custodial-bot lending<br>memes only</div></div>
        <div class="col"><div class="bar b3"><span class="q">?</span></div>
          <div class="ath grad">YOU TELL US</div><div class="tok">$MARGIN</div>
          <div class="sub2"><b>stocks + majors + natives</b> · web-first<br>TP/SL on collateral · AI desk · 15s keeper</div></div>

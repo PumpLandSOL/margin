@@ -55,7 +55,7 @@
 > the AI proposes. the rules enforce. it can never move your funds.
 
 **6/ — attach `margin-vs.png`**
-> the other desks keep your keys in a telegram bot and tick every ~90 seconds.
+> the other desks are custodial bots — they hold your keys and tick every ~90 seconds.
 >
 > MARGIN holds zero keys, lives on the open web, and its keeper ticks every 15.
 >
