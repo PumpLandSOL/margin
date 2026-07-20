@@ -52,6 +52,10 @@ const LP_POOL_START = 300;              // simulated LP pool (ETH)
 const CATALOG = [
   { sym: 'QUANT',      cls: 'meme', mint: '0x41af7e794DEe45EEfab49B6c387eAC9368d69C4D', ds: 'token' },  // yes, really
   { sym: 'INDEX',      cls: 'meme', mint: '0x56910D4409F3a0C78C64DD8D0545FF0705389870', ds: 'token' },  // no hard feelings
+  // crypto majors — real Pyth feeds; BTC earns RWA-grade LTV, the volatile ones price like memes
+  { sym: 'BTC',  cls: 'rwa',  sub: 'major', mint: 'maj-BTC',  feed: 'e62df6c8b4a85fe1a67db44dc12de5db330f7ac66b72dc658afedf0f4a415b43' },
+  { sym: 'DOGE', cls: 'meme', sub: 'major', mint: 'maj-DOGE', feed: 'dcef50dd0a4cd2dcc17e45df1676dcb336a11a61c69df7a0299b0150c672d25c' },
+  { sym: 'XRP',  cls: 'meme', sub: 'major', mint: 'maj-XRP',  feed: 'ec5d399846a9209f3fe5881d70aae9268c94339ff9817e8d18ff19fa05eea1c8' },
   { sym: 'JUGGERNAUT', cls: 'meme', mint: 'pair:0x588b0785f50063260003B7790C42f1eF74902746', ds: 'pair' },
   { sym: 'CASHCAT',    cls: 'meme', mint: 'pair:0xA70fc67C9F69da90B63a0e4C05D229954574E313', ds: 'pair' },
   { sym: 'AAPL',  cls: 'rwa', mint: 'eq-AAPL',  feed: '241b9a5ce1c3e4bfc68e377158328628f1b478afaa796c4b1760bd3713c2d2d2' },
@@ -149,7 +153,7 @@ async function pollPrices() {
 }
 function pubPrices() { const o = {}; for (const c of CATALOG) if (PRICES[c.mint]) o[c.sym] = PRICES[c.mint]; return o; }
 function catalogPub() {
-  return CATALOG.map((c) => ({ sym: c.sym, cls: c.cls, mint: c.mint, price: PRICES[c.mint] || null, enabled: !!PRICES[c.mint] }));
+  return CATALOG.map((c) => ({ sym: c.sym, cls: c.cls, sub: c.sub || null, mint: c.mint, price: PRICES[c.mint] || null, enabled: !!PRICES[c.mint] }));
 }
 
 // ---------- real wallet balance read on Robinhood Chain (the "your actual bag" feature) ----------
@@ -200,11 +204,15 @@ async function register(wallet, ref) {
       const c = CATALOG.find((x) => x.sym === sym);
       if (c && PRICES[c.mint] > 0) a.vault[c.mint] = r4(100 / PRICES[c.mint]);
     }
+    for (const sym of ['BTC', 'DOGE', 'XRP']) {   // the majors
+      const c = CATALOG.find((x) => x.sym === sym);
+      if (c && PRICES[c.mint] > 0) a.vault[c.mint] = r4(100 / PRICES[c.mint]);
+    }
     for (const sym of ['TSLA', 'SPY']) {   // a taste of the RWA side too
       const c = CATALOG.find((x) => x.sym === sym);
       if (c && PRICES[c.mint] > 0) a.vault[c.mint] = r4(150 / PRICES[c.mint]);
     }
-    receipt('demo_bag', { wallet: short(wallet), summary: `${short(wallet)} arrived with an empty account — granted a demo bag (~$700 across Robinhood Chain tokens + tokenized stocks, plus 0.002 eth). real bags read automatically.` });
+    receipt('demo_bag', { wallet: short(wallet), summary: `${short(wallet)} arrived with an empty account — granted a demo bag (~$1,000 across Robinhood Chain tokens + crypto majors + tokenized stocks, plus 0.002 eth). real bags read automatically.` });
   }
   dirty();
   return a;

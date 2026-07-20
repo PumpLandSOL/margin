@@ -112,7 +112,7 @@ h2.big .grn{color:var(--grn)}
 .mkt td.mo{font-family:'JetBrains Mono';font-size:13px;color:var(--sub)}
 .mkt td.mo b{color:var(--ink)}
 .mkt .cls{font-family:'JetBrains Mono';font-size:9px;letter-spacing:.1em;padding:3px 9px;border-radius:999px}
-.cls.meme{background:rgba(186,255,63,.09);color:var(--lime)} .cls.rwa{background:var(--wash);color:var(--grn)} .cls.rh{background:rgba(0,224,90,.14);color:var(--grn);border:1px solid rgba(0,224,90,.3)}
+.cls.meme{background:rgba(186,255,63,.09);color:var(--lime)} .cls.rwa{background:var(--wash);color:var(--grn)} .cls.rh{background:rgba(0,224,90,.14);color:var(--grn);border:1px solid rgba(0,224,90,.3)} .cls.maj{background:rgba(240,246,240,.08);color:var(--ink)}
 .mkt .ltv{color:var(--grn);font-weight:700}
 .tiernote{margin-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
 @media(max-width:760px){.tiernote{grid-template-columns:1fr}}
@@ -198,7 +198,7 @@ footer .fm{font-weight:900;font-size:16px;color:var(--ink);margin-bottom:10px}
   <div class="wrap in">
     <div class="kicker"><span class="dot"></span>LIVE PRICES · 15S KEEPER · 0 SIGNATURES EVER</div>
     <h1>Your bag is<br><span class="grn">buying power.</span></h1>
-    <p class="sub">Borrow ETH on Robinhood Chain against tokenized stocks and memecoins — <b>without selling</b>.
+    <p class="sub">Borrow ETH on Robinhood Chain against tokenized stocks, crypto majors and memecoins — <b>without selling</b>.
       Take-profits and stops on collateral <b>while it's pledged</b>, a keeper watching every 15 seconds,
       and credit that compounds into better terms. <b>RWAs at up to 70% LTV.</b></p>
     <div class="cta">
@@ -380,13 +380,13 @@ fetch('/api/config').then(r=>r.json()).then(cfg=>{
 
 let LIVE=[];
 function renderTicker(){
-  const cell=t=>`<span class="tk"><span class="s">${t.sym}</span><span class="p">${fmtPx(t.price)}</span><span class="c">${t.cls==='rwa'?'STOCK':'RH'}</span></span>`;
+  const cell=t=>`<span class="tk"><span class="s">${t.sym}</span><span class="p">${fmtPx(t.price)}</span><span class="c">${t.sub==='major'?'MAJOR':t.cls==='rwa'?'STOCK':'RH'}</span></span>`;
   const row=LIVE.map(cell).join('');
   document.getElementById('ticker').innerHTML=row+row; // duplicated for a seamless loop
 }
 function renderMarkets(){
   const row=t=>`<tr><td class="sym">${t.sym}</td>
-    <td><span class="cls ${t.cls==='rwa'?'rwa':'rh'}">${t.cls==='rwa'?'STOCK · RWA':'ROBINHOOD CHAIN'}</span></td>
+    <td><span class="cls ${t.sub==='major'?'maj':t.cls==='rwa'?'rwa':'rh'}">${t.sub==='major'?'CRYPTO · MAJOR':t.cls==='rwa'?'STOCK · RWA':'ROBINHOOD CHAIN'}</span></td>
     <td class="mo r"><b>${fmtPx(t.price)}</b></td>
     <td class="mo r"><span class="ltv">${t.cls==='rwa'?'70%':'30%'}</span></td>
     <td class="mo r">${t.cls==='rwa'?'30 days':'7 days'}</td></tr>`;

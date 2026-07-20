@@ -220,7 +220,8 @@ valueEth = collateralAmount × price / ethUsd
       <h2><span class="no">07</span>Pricing &amp; oracles</h2>
       <p>Two real price sources, one per asset class. <b>Tokenized stocks, ETFs and metals</b> mark to
         <b>Pyth equity feeds</b> (the same real-time feeds professional venues use — AAPL/USD, TSLA/USD,
-        SPY/USD and so on), fetched in a single batched Hermes request per cycle. <b>Robinhood-native tokens</b>
+        SPY/USD and so on), fetched in a single batched Hermes request per cycle — <b>crypto majors</b>
+        (BTC, DOGE, XRP) mark to Pyth crypto feeds the same way. <b>Robinhood-native tokens</b>
         mark to their deepest on-chain liquidity via <b>DexScreener</b> — pinned to an exact deep pair where it
         matters, which avoids the mispriced-thin-pair problem. ETH/USD itself comes from Pyth and converts
         every quote.</p>
@@ -267,8 +268,8 @@ valueEth = collateralAmount × price / ethUsd
     <section class="s" id="catalog">
       <h2><span class="no">10</span>Collateral catalog</h2>
       <p>Live, curated, and expanding. Every entry is validated against a live price before it's enabled.</p>
-      <h3>Robinhood Chain natives</h3>
-      <p id="memeList" class="mo" style="font-size:13px;color:var(--sub)">QUANT · INDEX · JUGGERNAUT · CASHCAT</p>
+      <h3>Robinhood Chain natives &amp; crypto majors</h3>
+      <p id="memeList" class="mo" style="font-size:13px;color:var(--sub)">QUANT · INDEX · JUGGERNAUT · CASHCAT · BTC · DOGE · XRP</p>
       <h3>Tokenized stocks · ETFs · metals</h3>
       <p id="rwaList" class="mo" style="font-size:13px;color:var(--sub)">AAPL · NVDA · TSLA · COIN · MSTR · META · GOOGL · SPY · GLD · HOOD</p>
       <div class="callout note"><div class="ct">Yes, really</div>

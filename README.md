@@ -3,7 +3,7 @@
 **Your bag is buying power.** Web-first lending on **Robinhood Chain**: borrow ETH against
 tokenized stocks (up to 70% LTV, 30-day terms) and Robinhood-native memecoins (up to 30% LTV) — without selling.
 
-- **Two asset classes** — tokenized stocks/ETFs/metals marked to real Pyth equity feeds (AAPL, NVDA, TSLA, SPY, gold…), plus Robinhood Chain natives priced from their deepest pools (QUANT, INDEX, JUGGERNAUT, CASHCAT)
+- **Stocks, majors, natives** — tokenized stocks/ETFs/metals marked to real Pyth equity feeds (AAPL, NVDA, TSLA, SPY, gold…), crypto majors on Pyth crypto feeds (BTC, DOGE, XRP), and Robinhood Chain natives priced from their deepest pools (QUANT, INDEX, JUGGERNAUT, CASHCAT)
 - **Auto-protect** — arm take-profits and stop-losses on collateral *while it's pledged*; a 15-second keeper executes them
 - **Credit that compounds** — on-chain score 0–1000; clean repays unlock higher LTV and lower fees (Retail → Funded → Prime)
 - **The Desk** — an AI credit engine that reads your bag and structures your optimal loan; the AI proposes, deterministic rules enforce
