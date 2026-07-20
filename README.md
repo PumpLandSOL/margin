@@ -1,5 +1,7 @@
 # MARGIN ▲
 
+**$MARGIN** (Robinhood Chain): `0x1c65735d7403fca44af532b078cef892121f8888`
+
 **Your bag is buying power.** Web-first lending on **Robinhood Chain**: borrow ETH against
 tokenized stocks (up to 70% LTV, 30-day terms) and Robinhood-native memecoins (up to 30% LTV) — without selling.
 
